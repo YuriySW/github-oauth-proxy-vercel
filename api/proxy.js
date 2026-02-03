@@ -33,7 +33,7 @@ export default async function handler(req, res) {
           client_id: process.env.GITHUB_CLIENT_ID,
           client_secret: process.env.GITHUB_CLIENT_SECRET,
           code,
-          // УБРАЛИ redirect_uri - GitHub использует тот, что указан в настройках
+          // УБРАЛИ redirect_uri - GitHub использует callback URL из настроек
         }),
       },
     );
