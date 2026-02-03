@@ -1,11 +1,11 @@
 // api/proxy.js
 export default async function handler(req, res) {
-  // Разрешаем CORS — можно ограничить origin: 'https://твой-username.github.io' позже
+  // Разрешаем CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Обрабатываем preflight OPTIONS (браузер всегда шлёт перед POST)
+  // Обрабатываем preflight OPTIONS
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -33,8 +33,7 @@ export default async function handler(req, res) {
           client_id: process.env.GITHUB_CLIENT_ID,
           client_secret: process.env.GITHUB_CLIENT_SECRET,
           code,
-          redirect_uri:
-            process.env.REDIRECT_URI || 'http://localhost:3000/auth',
+          // УБРАЛИ redirect_uri - GitHub использует тот, что указан в настройках
         }),
       },
     );
